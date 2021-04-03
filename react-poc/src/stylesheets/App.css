@@ -5,9 +5,11 @@
     height: fit-content;
     width: fit-content;
     padding: 6em;
-    -webkit-box-shadow: -2px -1px 15px 7px rgba(0,0,0,0.5);
+    border-radius: 120px;
+    box-shadow: 0px 0px 120px 20px rgba(0,0,0,0.35);
+    /* -webkit-box-shadow: -2px -1px 15px 7px rgba(0,0,0,0.5);
     -moz-box-shadow: -3px -2px 30px 14px rgba(0,0,0,0.425);
-    box-shadow: -4px -3px 45px 21px rgba(0,0,0,0.35);
+    box-shadow: -4px -3px 45px 21px rgba(0,0,0,0.35); */
 }
 
 .App button {
