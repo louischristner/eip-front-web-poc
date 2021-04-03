@@ -1,0 +1,33 @@
+.App {
+    text-align: center;
+    margin: 0 auto;
+    transform: perspective(1px) translateY(40%);
+    height: fit-content;
+    width: fit-content;
+    padding: 6em;
+    -webkit-box-shadow: -2px -1px 15px 7px rgba(0,0,0,0.5);
+    -moz-box-shadow: -3px -2px 30px 14px rgba(0,0,0,0.425);
+    box-shadow: -4px -3px 45px 21px rgba(0,0,0,0.35);
+}
+
+.App button {
+    margin-top: 1em;
+    background-color: #d3d3d3;
+    color: #424242;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 0px;
+    width: 200px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.App button:hover {
+    background-color: #424242;
+    color: #d3d3d3;
+}
+
+.App input {
+    margin-top: 1em;
+    width: 200px;
+}
