@@ -1,59 +1,28 @@
 import React from 'react';
-import { InputField, InputButton } from './Inputs';
+import SignIn from './auth/SignIn';
+import SignUp from './auth/SignUp';
 import "../stylesheets/App.css";
 
 type State = {
-    email: string;
-    password: string;
-    confPassword: string;
+    signIn: boolean;
 };
 
 class App extends React.Component {
     state: State = {
-        email: '',
-        password: '',
-        confPassword: '',
+        signIn: true,
     };
 
-    changeEmail = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    updateSignIn = (): void => {
         this.setState({
-            email: e.target.value,
+            signIn: !this.state.signIn
         });
     };
 
-    changePassword = (e: React.ChangeEvent<HTMLInputElement>): void => {
-        this.setState({
-            password: e.target.value,
-        });
-    };
-
-    changeConfPassword = (e: React.ChangeEvent<HTMLInputElement>): void => {
-        this.setState({
-            confPassword: e.target.value,
-        });
-    };
-
-    checkInputs = (): void => {
-        if (!!this.state.password && this.state.password === this.state.confPassword) {
-            console.log('Possible');
-        } else {
-            console.log('Impossible');
-        }
-    };
-
-    render() {
+    render(): React.ReactElement {
         return (
-            <div className="App">
-                <h1>Sign Up</h1>
-                <InputField type="email" value={this.state.email}
-                    placeholder="Email" onChange={this.changeEmail} />
-                <InputField type="password" value={this.state.password}
-                    placeholder="Password" onChange={this.changePassword} />
-                <InputField type="password" value={this.state.confPassword}
-                    placeholder="Confirm password" onChange={this.changeConfPassword} />
-                <InputButton text="Sign Up" onClick={this.checkInputs} />
-                <InputButton text="I already have an account" />
-            </div>
+            this.state.signIn
+                ? <SignIn updateSignIn={this.updateSignIn.bind(this)} />
+                : <SignUp updateSignIn={this.updateSignIn.bind(this)} />
         );
     }
 }
