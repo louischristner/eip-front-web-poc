@@ -1,9 +1,11 @@
 import React from 'react';
+import Account from '../../services/Account';
 import { InputField, InputButton } from '../Inputs';
-import "../../stylesheets/App.css";
+import "../../stylesheets/Connection.css";
 
 type Props = {
     updateSignIn: () => void;
+    setConnected: (value: boolean) => void;
 };
 
 type State = {
@@ -31,15 +33,30 @@ class SignIn extends React.Component<Props, State> {
 
     checkInputs = (): void => {
         if (!!this.state.email && !!this.state.password) {
-            console.log('Possible');
+            Account.login({
+                email: this.state.email,
+                password: this.state.password,
+            }).then(res => {
+                console.log(res);
+                this.props.setConnected(true);
+            }).catch(err => {
+                console.error(err);
+                this.setState({
+                    email: '',
+                    password: '',
+                }, () => {
+                    this.props.setConnected(false);
+                });
+            });
         } else {
             console.log('Impossible');
+            this.props.setConnected(false);
         }
     };
 
     render(): React.ReactElement {
         return (
-            <div className="App">
+            <div className="Connection">
                 <h1>Sign In</h1>
                 <InputField type="email" value={this.state.email}
                     placeholder="Email" onChange={this.changeEmail} />

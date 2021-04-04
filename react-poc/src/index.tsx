@@ -1,13 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './stylesheets/index.css';
-import App from './components/App';
+import Dashboard from './components/Dashboard';
+import Connection from './components/Connection';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
-    <React.StrictMode>
-        <App />
-    </React.StrictMode>,
+    <BrowserRouter>
+        <Switch>
+            <Route path='/' exact={true} render={() => <Connection />} />
+            <Route path='/dashboard' exact={true} render={() => <Dashboard />} />
+            <Route component={() => <h1>404 Not Found!</h1>} />
+        </Switch>
+    </BrowserRouter>,
+    // <React.StrictMode>
+    //     <App />
+    // </React.StrictMode>,
     document.getElementById('root'),
 );
 
