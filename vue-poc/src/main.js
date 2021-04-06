@@ -1,8 +1,33 @@
 import Vue from 'vue'
-import App from './App.vue'
+import Dashboard from './components/Dashboard'
+import Connection from './components/Connection'
+import './stylesheets/index.css'
 
-Vue.config.productionTip = false
+const routes = {
+    '/': Connection,
+    '/dashboard': Dashboard,
+}
+
+const NotFound = {
+    render() {
+        return (
+            <h1>404 Not Found</h1>
+        );
+    }
+}
 
 new Vue({
-  render: h => h(App),
-}).$mount('#app')
+    el: '#app',
+    data: { currentRoute: window.location.pathname },
+    computed: {
+        ViewComponent() {
+            return routes[this.currentRoute] || NotFound
+        }
+    },
+
+    render(h) {
+        return h(
+            this.ViewComponent
+        );
+    }
+});
