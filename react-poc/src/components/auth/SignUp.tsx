@@ -1,82 +1,60 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Account from '../../services/Account';
 import { InputField, InputButton } from '../Inputs';
+import AuthProps from './AuthProps';
 import "../../stylesheets/Connection.css";
 
-type Props = {
-    updateSignIn: () => void;
-    setConnected: (value: boolean) => void;
-};
+const SignUp: React.FC<AuthProps> = ({ updateSignIn, setConnected }: AuthProps) => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confPassword, setConfPassword] = useState('');
 
-type State = {
-    email: string;
-    password: string;
-    confPassword: string;
-};
-
-class SignUp extends React.Component<Props, State> {
-    state: State = {
-        email: '',
-        password: '',
-        confPassword: '',
+    const changeEmail = (e: React.ChangeEvent<HTMLInputElement>): void => {
+        setEmail(e.target.value);
     };
 
-    changeEmail = (e: React.ChangeEvent<HTMLInputElement>): void => {
-        this.setState({
-            email: e.target.value,
-        });
+    const changePassword = (e: React.ChangeEvent<HTMLInputElement>): void => {
+        setPassword(e.target.value);
     };
 
-    changePassword = (e: React.ChangeEvent<HTMLInputElement>): void => {
-        this.setState({
-            password: e.target.value,
-        });
+    const changeConfPassword = (e: React.ChangeEvent<HTMLInputElement>): void => {
+        setConfPassword(e.target.value);
     };
 
-    changeConfPassword = (e: React.ChangeEvent<HTMLInputElement>): void => {
-        this.setState({
-            confPassword: e.target.value,
-        });
-    };
-
-    checkInputs = (): void => {
-        if (!!this.state.email && !!this.state.password && this.state.password === this.state.confPassword) {
+    const checkInputs = (): void => {
+        if (!!email && !!password && password === confPassword) {
             Account.register({
-                email: this.state.email,
-                password: this.state.password,
+                email: email,
+                password: password,
             }).then(res => {
                 console.log(res);
-                this.props.setConnected(true);
+                setConnected(true);
             }).catch(err => {
                 console.error(err);
-                this.setState({
-                    email: '',
-                    password: '',
-                }, () => {
-                    this.props.setConnected(false);
-                });
+                setEmail('');
+                setPassword('');
+                setConfPassword('');
+                setConnected(false);
             });
         } else {
             console.log('Impossible');
-            this.props.setConnected(false);
+            setConnected(false);
         }
     };
 
-    render(): React.ReactElement {
-        return (
-            <div className="Connection">
-                <h1>Sign Up</h1>
-                <InputField type="email" value={this.state.email}
-                    placeholder="Email" onChange={this.changeEmail} />
-                <InputField type="password" value={this.state.password}
-                    placeholder="Password" onChange={this.changePassword} />
-                <InputField type="password" value={this.state.confPassword}
-                    placeholder="Confirm password" onChange={this.changeConfPassword} />
-                <InputButton text="Sign Up" onClick={this.checkInputs} />
-                <InputButton text="I already have an account" onClick={this.props.updateSignIn} />
-            </div>
-        );
-    }
-}
+    return (
+        <div className="Connection">
+            <h1>Sign Up</h1>
+            <InputField type="email" value={email}
+                placeholder="Email" onChange={changeEmail} />
+            <InputField type="password" value={password}
+                placeholder="Password" onChange={changePassword} />
+            <InputField type="password" value={confPassword}
+                placeholder="Confirm password" onChange={changeConfPassword} />
+            <InputButton text="Sign Up" onClick={checkInputs} />
+            <InputButton text="I already have an account" onClick={updateSignIn} />
+        </div>
+    );
+};
 
 export default SignUp;
