@@ -27,7 +27,7 @@ export default {
     margin-top: 12em;
     padding-top: 6em;
     height: 28em;
-    width: 26em;
+    width: 22%;
     border-radius: 120px;
     box-shadow: 0px 0px 120px 20px rgba(0,0,0,0.35);
 }
