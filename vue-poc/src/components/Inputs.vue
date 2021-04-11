@@ -5,6 +5,11 @@ const InputField = {
         value: String,
         placeholder: String
     },
+    methods: {
+        onChange(event) {
+            this.$emit('changed', event.target.value);
+        }
+    },
 
     render() {
         return (
@@ -13,6 +18,7 @@ const InputField = {
                     type={this.type}
                     value={this.value}
                     placeholder={this.placeholder}
+                    v-on:change={this.onChange}
                 />
             </div>
         );
@@ -23,11 +29,18 @@ const InputButton = {
     props: {
         text: String
     },
+    methods: {
+        onClick() {
+            this.$emit('clicked');
+        }
+    },
 
     render() {
         return (
             <div>
-                <button class="any">{this.text}</button>
+                <button v-on:click={this.onClick} class="any">
+                    {this.text}
+                </button>
             </div>
         )
     }

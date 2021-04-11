@@ -1,7 +1,7 @@
 <template>
     <div>
-        <SignIn v-if="signIn" />
-        <SignUp v-else />
+        <SignIn v-if="signIn" @updateSignIn="updateSignIn" />
+        <SignUp v-else @updateSignIn="updateSignIn" />
     </div>
 </template>
 
@@ -15,6 +15,11 @@ export default {
     data: function() {
         return {
             signIn: true
+        }
+    },
+    methods: {
+        updateSignIn() {
+            this.signIn = !this.signIn;
         }
     }
 }

@@ -1,20 +1,60 @@
 <template>
     <div class="Connection">
         <h1>Sign Up</h1>
-        <InputField type="email" value="" placeholder="Email" />
-        <InputField type="password" value="" placeholder="Password" />
-        <InputField type="password" value="" placeholder="Confirm password" />
-        <InputButton text="Sign Up" />
-        <InputButton text="I already have an account" />
+        <InputField type="email" value="" placeholder="Email" @changed="changeEmail" />
+        <InputField type="password" value="" placeholder="Password" @changed="changePassword" />
+        <InputField type="password" value="" placeholder="Confirm password" @changed="changeConfPassword" />
+        <InputButton text="Sign Up" @clicked="checkInputs" />
+        <InputButton text="I already have an account" @clicked="updateSignIn" />
     </div>
 </template>
 
 <script>
+import Account from '../../services/Account'
 import { InputField, InputButton } from '../Inputs'
 
 export default {
     name: 'SignUp',
-    components: { InputField, InputButton }
+    components: { InputField, InputButton },
+    data() {
+        return {
+            email: '',
+            password: '',
+            confPassword: '',
+        }
+    },
+    methods: {
+        changeEmail(email) {
+            this.email = email;
+        },
+
+        changePassword(password) {
+            this.password = password;
+        },
+
+        changeConfPassword(confPassword) {
+            this.confPassword = confPassword;
+        },
+
+        updateSignIn() {
+            this.$emit('updateSignIn');
+        },
+
+        checkInputs() {
+            if (!!this.email && !!this.password && this.password === this.confPassword) {
+                Account.register({
+                    email: this.email,
+                    password: this.password,
+                }).then(res => {
+                    console.log(res);
+                }).catch(err => {
+                    console.error(err);
+                });
+            } else {
+                console.log('Impossible');
+            }
+        }
+    }
 }
 </script>
 
