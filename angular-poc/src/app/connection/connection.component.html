@@ -1,0 +1,25 @@
+<div>
+    <div *ngIf="signIn; else signUp">
+        <div class="Connection">
+            <h1>Sign In</h1>
+            <div><input (change)="changeEmail($event.target.value)" type="email" placeholder="Email" /></div>
+            <div><input (change)="changePassword($event.target.value)" type="password" placeholder="Password" /></div>
+            <div><button (click)="checkInputs()">Sign In</button></div>
+            <div><button (click)="updateSignIn()">
+                I don't have an account
+            </button></div>
+        </div>
+    </div>
+    <ng-template #signUp>
+        <div class="Connection">
+            <h1>Sign Up</h1>
+            <div><input (change)="changeEmail($event.target.value)" type="email" placeholder="Email" /></div>
+            <div><input (change)="changePassword($event.target.value)" type="password" placeholder="Password" /></div>
+            <div><input (change)="changeConfPassword($event.target.value)" type="password" placeholder="Confirm Password" /></div>
+            <div><button (click)="checkInputs()">Sign Up</button></div>
+            <div><button (click)="updateSignIn()">
+                I already have an account
+            </button></div>
+        </div>
+    </ng-template>
+</div>
