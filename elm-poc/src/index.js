@@ -1,6 +1,9 @@
 import './main.css';
 import { Elm } from './Main.elm';
 import * as serviceWorker from './serviceWorker';
+import './stylesheets/Connection.css';
+import './stylesheets/Dashboard.css';
+import './stylesheets/Navbar.css';
 
 Elm.Main.init({
   node: document.getElementById('root')
