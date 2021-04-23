@@ -1,4 +1,5 @@
 import { h } from 'preact';
+import { useState } from 'preact/hooks';
 import Account from '../../services/Account';
 import { InputField, InputButton } from '../Inputs';
 import "../../stylesheets/Connection.css";
